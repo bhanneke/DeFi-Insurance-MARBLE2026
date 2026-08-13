@@ -1,0 +1,51 @@
+
+=== [1] Protocol FOC and concavity (Eq. 2, Theorem 1 (A1) protocol side) ===
+  [PASS] FOC solution equals protocol_target_CC closed form
+  [PASS] d2pi/dCC2 = (positive factor) * (theta - 1)  [< 0 for theta < 1]
+  [PASS] coverage<=TVL cap equals the code's CC_cap
+
+=== [2] Hazard-rate fit (Eq. 4) and anchor (Eq. 7) ===
+  [PASS] SSE(lam0) = 0 (perfect recovery on exponential prices)
+  [PASS] dSSE/dlam = 0 at lam = lam0
+  [PASS] d/dlam [1 - exp(-lam T)] > 0
+  [PASS] anchor p_1Y = 1 - exp(-lam) lies in (0,1): positive iff lam > 0, sup = 1
+
+=== [3] Prudential cap monotonicity (Eq. 5) ===
+  [PASS] dU_max/dp_hat = -(U_hi - U_min) kappa_U / (1 + kappa_U p_hat)^2 < 0 for U_hi > U_min
+  [PASS] bounds: U_max -> U_hi as p_hat -> 0, U_max -> U_min as p_hat -> oo
+
+=== [4] Risk index never exceeds the anchor (Eqs. 6-7) ===
+  [PASS] P_anchor - P_HACK(T) = exp(-lam T) - exp(-lam) >= 0 for T <= 1
+  [PASS] numeric: P_risk(0.004) = 0.00200 <= P_anchor = 0.00399
+  [PASS] numeric: P_risk(0.02) = 0.00994 <= P_anchor = 0.01980
+  [PASS] numeric: P_risk(0.2) = 0.09404 <= P_anchor = 0.18127
+
+=== [5] Yield share monotonicity (Eq. 8, premise of Theorem 1) ===
+  [PASS] dgamma/dU > 0 (equals alpha beta (U/Ut)^beta / U)
+  [PASS] dgamma/dP_risk > 0 (equals (1-alpha) delta (Pr/Pa)^delta / P_risk)
+
+=== [6] Proposition 2(i): participation bound (Eq. 13) + minimum pool yield ===
+  [PASS] solving r_LP = r_market + rho_LP for gamma yields Eq. (13)
+  [PASS] solving the same equality for r_pool yields the minimum-pool-yield corollary
+
+=== [7] Corollary: capital expansion lowers gamma_min ===
+  [PASS] dgamma_min/dC_S = -gamma_min / C_total < 0
+  [PASS] sign(dgamma_min/dC_C) = sign(p s cov' C_total - [CLP(r+rho) + p s cov])
+  [PASS] condition < 0 at baseline calibration (value = -0.02910)
+
+=== [8] Proposition 2(ii): negative feedback and local stability (Eq. 14) ===
+  [PASS] dr_LP/dC_LP < 0  <=>  p E C_LP < (1-phi) r_pool [ (alpha cov/Ut)(C_LP + 2A) + (1-alpha) K A C_LP ]
+  [PASS] stability condition holds at C_LP = 250/500/800 $M (values ['-4006', '-2369', '-405'])
+  [PASS] pi_LP is unimodal in C_LP on [1, 5000] $M (sign switches = 1)
+
+=== [9] Proposition 3: solvency bound ===
+  [PASS] psi c_max U C_LP <= C_LP  <=>  U <= 1/(psi c_max)  (Eq. 15)
+  [PASS] k=2 hacks: U <= 1/(psi (c_1 + c_2))
+  [PASS] 1/(psi c_max) = 208 >> average dynamic cap 21.2
+
+=== [10] Cross-check against defi_insurance_simulation.py ===
+  [PASS] protocol_target_CC == symbolic CC* (200 random draws)
+  [PASS] Umax_from_paper == Eq. (5) (200 random draws)
+  [PASS] gamma_from_paper == Eq. (8) (200 random draws)
+
+All checks passed.

@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+.DS_Store
+outputs/*.pkl
+outputs/scenarios/
+nexus_benchmark/nexus_combined_data.csv
