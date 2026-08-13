@@ -15,10 +15,10 @@ and to certify that the closed forms match the implementation in
 | 3 | Eq. (5) prudential cap | U_max(t) strictly decreases in the market-implied annual hack probability, with limits U_max^hi (p→0) and U_min (p→∞) |
 | 4 | Eqs. (6)–(7) | Lemma: under a flat hazard, the short-maturity-weighted risk index never exceeds the annual anchor, so the risk ratio in Eq. (8) is ≤ 1 |
 | 5 | Eq. (8), premise of Theorem 1 | The yield share is strictly increasing in utilization and in the risk index |
-| 6 | Prop. 2(i), Eq. (13) + Appendix C corollary | Solving r_LP ≥ r_market + ρ_LP for γ reproduces the participation bound exactly; solving for r_pool reproduces the minimum-pool-yield corollary |
+| 6 | Prop. 2(i), Eq. (14) + Appendix C corollary | Solving r_LP ≥ r_market + ρ_LP for γ reproduces the participation bound exactly; solving for r_pool reproduces the minimum-pool-yield corollary |
 | 7 | Capital-expansion corollary | ∂γ_min/∂C_S < 0 unconditionally; for C_C the exact sign condition is derived and certified at the Table-2 calibration |
-| 8 | Prop. 2(ii), Eq. (14) | The local stability condition dr_LP/dC_LP < 0 is derived in closed form and certified at the Table-2 calibration; the (clipped) LP payoff is numerically unimodal in C_LP (assumption (A1), LP side) |
-| 9 | Prop. 3, Eq. (15) | The solvency bound U ≤ 1/(ψ·c_max) and its k-hack generalization; at the simulated concentration (c_max ≈ 0.5%) the bound (~208) far exceeds the average dynamic cap (~21) |
+| 8 | Prop. 2(ii), Eq. (15) | The local stability condition dr_LP/dC_LP < 0 is derived in closed form and certified at the Table-2 calibration; the (clipped) LP payoff is numerically unimodal in C_LP (assumption (A1), LP side) |
+| 9 | Prop. 3, Eq. (17) | The solvency bound U ≤ 1/(ψ·c_max) and its k-hack generalization; at the simulated concentration (c_max ≈ 0.5%) the bound (~208) far exceeds the average dynamic cap (~21) |
 | 10 | Code ↔ paper | `protocol_target_CC`, `Umax_from_paper`, and `gamma_from_paper` agree with the symbolic Eqs. (2), (5), (8) on 200 random parameter draws each |
 
 ## What is not (and cannot be) mechanized

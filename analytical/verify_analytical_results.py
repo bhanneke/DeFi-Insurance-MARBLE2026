@@ -24,14 +24,14 @@ PASS/FAIL. Equation numbers refer to the paper. The suite covers:
       P_anchor, so the risk ratio in Eq. (8) is bounded by one.
   [5] Yield share (Eq. 8): strictly increasing in utilization and in the
       risk index (the monotonicity required by Theorem 1).
-  [6] Proposition 2(i): the participation bound gamma_min (Eq. 13) follows
+  [6] Proposition 2(i): the participation bound gamma_min (Eq. 14) follows
       from r_LP >= r_market + rho_LP; corollary "minimum pool yield"
       (Appendix C) is the same inequality solved for r_pool.
   [7] Corollary "capital expansion": gamma_min strictly decreases in
       trading-fee inflows C_S (unconditional), and in collateral C_C under
       an explicit sufficient condition that holds at the paper's
       calibration (Table 2).
-  [8] Proposition 2(ii): the LP capital dynamics (Eq. 14) are a negative
+  [8] Proposition 2(ii): the LP capital dynamics (Eq. 15) are a negative
       feedback loop; the local stability condition dr_LP/dC_LP < 0 is
       derived explicitly and certified at the paper's calibration.
   [9] Proposition 3: the solvency bound U <= 1/(psi * c_max), including the
@@ -190,7 +190,7 @@ check("dgamma/dP_risk > 0 (equals (1-alpha) delta (Pr/Pa)^delta / P_risk)",
 
 
 # ----------------------------------------------------------------------
-section("[6] Proposition 2(i): participation bound (Eq. 13) + minimum pool yield")
+section("[6] Proposition 2(i): participation bound (Eq. 14) + minimum pool yield")
 # ----------------------------------------------------------------------
 # LP realized return (Appendix C): r_LP = [gamma (1-phi) Y_total - p E] / C_LP
 Y_total = rpool * Ctot
@@ -198,7 +198,7 @@ r_LP = (gamma * (1 - phi) * Y_total - p * E) / CLP
 
 gamma_min_solved = sp.solve(sp.Eq(r_LP, rmkt + rhoLP), gamma)[0]
 gamma_min_paper = (CLP * (rmkt + rhoLP) + p * E) / ((1 - phi) * rpool * Ctot)
-check("solving r_LP = r_market + rho_LP for gamma yields Eq. (13)",
+check("solving r_LP = r_market + rho_LP for gamma yields Eq. (14)",
       sp.simplify(gamma_min_solved - gamma_min_paper) == 0)
 
 rpool_solved = sp.solve(sp.Eq(r_LP, rmkt + rhoLP), rpool)[0]
@@ -210,7 +210,7 @@ check("solving the same equality for r_pool yields the minimum-pool-yield coroll
 # ----------------------------------------------------------------------
 section("[7] Corollary: capital expansion lowers gamma_min")
 # ----------------------------------------------------------------------
-# (a) In C_S the claim is unconditional: the numerator of Eq. (13) does not
+# (a) In C_S the claim is unconditional: the numerator of Eq. (14) does not
 #     depend on C_S while the denominator is increasing in it.
 dgmin_dCS = sp.simplify(sp.diff(gamma_min_paper, CS))
 check("dgamma_min/dC_S = -gamma_min / C_total < 0",
@@ -237,7 +237,7 @@ check(f"condition < 0 at baseline calibration (value = {float(num):+.5f})",
 
 
 # ----------------------------------------------------------------------
-section("[8] Proposition 2(ii): negative feedback and local stability (Eq. 14)")
+section("[8] Proposition 2(ii): negative feedback and local stability (Eq. 15)")
 # ----------------------------------------------------------------------
 # With coverage fixed, U = coverage / C_LP and the concrete yield share of
 # Eq. (8) (beta = 1, risk ratio K constant), the LP return as a function of
@@ -290,7 +290,7 @@ section("[9] Proposition 3: solvency bound")
 # sum(coverage) = c_max * U * C_LP  =>  Loss <= psi c_max U C_LP.
 # Solvency C_LP >= Loss then holds whenever psi c_max U <= 1.
 Ubound = sp.solve(sp.Eq(psi * cmax * U * CLP, CLP), U)[0]
-check("psi c_max U C_LP <= C_LP  <=>  U <= 1/(psi c_max)  (Eq. 15)",
+check("psi c_max U C_LP <= C_LP  <=>  U <= 1/(psi c_max)  (Eq. 17)",
       sp.simplify(Ubound - 1 / (psi * cmax)) == 0)
 # k-hack generalization: with the k largest coverage shares c_(1..k),
 # obligation <= (c_1 + ... + c_k) U C_LP; same algebra applies.

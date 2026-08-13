@@ -23,6 +23,7 @@ This repository contains exactly the material behind the paper — nothing else.
 | `defi_insurance_simulation.py` | Monte-Carlo simulation behind Section 6 ("Stylized Simulation"): Table-2 baseline (θ=0.5, μ=3, U_target=15, dynamic prudential cap κ_U=100), insolvency-shortfall tracking, `incident_scale` stress multiplier |
 | `scenarios.py` | Reproduces the stress test (4× hack intensity) and the pool-return sensitivity of Section 6 |
 | `analytical/` | SymPy verification of the paper's analytical results (Theorem 1 primitives, Propositions 2–3 and corollaries) and their correspondence to the simulation — see `analytical/README.md`; all 29 checks pass (`verification_log.txt`) |
+| [`Appendix/`](Appendix/) | Online appendix to the proceedings version (which carries no appendices): symbol table, simulation details with Fig. A.1, and all proofs — rendered directly on GitHub |
 | `outputs/` | Reference outputs: Figs. 2–4 of the paper, per-run metrics, protocol population |
 | `nexus_benchmark/` | Methodology behind the Nexus Mutual premium benchmark of Section 6 (median 2.6%/yr across 10,893 covers) |
 

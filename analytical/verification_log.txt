@@ -24,8 +24,8 @@
   [PASS] dgamma/dU > 0 (equals alpha beta (U/Ut)^beta / U)
   [PASS] dgamma/dP_risk > 0 (equals (1-alpha) delta (Pr/Pa)^delta / P_risk)
 
-=== [6] Proposition 2(i): participation bound (Eq. 13) + minimum pool yield ===
-  [PASS] solving r_LP = r_market + rho_LP for gamma yields Eq. (13)
+=== [6] Proposition 2(i): participation bound (Eq. 14) + minimum pool yield ===
+  [PASS] solving r_LP = r_market + rho_LP for gamma yields Eq. (14)
   [PASS] solving the same equality for r_pool yields the minimum-pool-yield corollary
 
 === [7] Corollary: capital expansion lowers gamma_min ===
@@ -33,13 +33,13 @@
   [PASS] sign(dgamma_min/dC_C) = sign(p s cov' C_total - [CLP(r+rho) + p s cov])
   [PASS] condition < 0 at baseline calibration (value = -0.02910)
 
-=== [8] Proposition 2(ii): negative feedback and local stability (Eq. 14) ===
+=== [8] Proposition 2(ii): negative feedback and local stability (Eq. 15) ===
   [PASS] dr_LP/dC_LP < 0  <=>  p E C_LP < (1-phi) r_pool [ (alpha cov/Ut)(C_LP + 2A) + (1-alpha) K A C_LP ]
   [PASS] stability condition holds at C_LP = 250/500/800 $M (values ['-4006', '-2369', '-405'])
   [PASS] pi_LP is unimodal in C_LP on [1, 5000] $M (sign switches = 1)
 
 === [9] Proposition 3: solvency bound ===
-  [PASS] psi c_max U C_LP <= C_LP  <=>  U <= 1/(psi c_max)  (Eq. 15)
+  [PASS] psi c_max U C_LP <= C_LP  <=>  U <= 1/(psi c_max)  (Eq. 17)
   [PASS] k=2 hacks: U <= 1/(psi (c_1 + c_2))
   [PASS] 1/(psi c_max) = 208 >> average dynamic cap 21.2
 
