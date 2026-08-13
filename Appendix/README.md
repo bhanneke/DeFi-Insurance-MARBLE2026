@@ -6,8 +6,7 @@ Online appendix to
 > Risk Insurance.* MARBLE 2026, Springer. To appear.
 
 The proceedings version does not carry appendices (conference rule); this
-folder contains them. A typeset full version of the paper including these
-appendices is available as an arXiv preprint (see the paper's references).
+folder contains them and is cited by the paper as its online appendix.
 Equation numbers below refer to the proceedings version.
 
 Provenance: Table 1 is definitional. Table 2 mirrors `SimulationParams` in
