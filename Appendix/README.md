@@ -153,20 +153,20 @@ All derivations below are additionally verified symbolically:
 ### Proof of Theorem 1
 
 Under assumption (ii), speculators are price-takers earning zero expected
-profit; by Proposition 1, equilibrium HACK prices equal risk-neutral hack
-probabilities, so speculator behavior affects the insurance game only through
-the continuous price index $P_{\mathrm{risk}}(t)$ and the fee inflow
+profit; by Proposition 1, equilibrium HACK/NOHACK prices equal risk-neutral
+hack probabilities, so speculator behavior affects the insurance game only
+through the continuous price index $P_{\mathrm{risk}}(t)$ and the fee inflow
 $C_{\mathrm{S}}$. It therefore suffices to establish equilibrium in the game
 between the protocol and the LP; $S^{\*}$ is the implied zero-profit speculator
 demand.
 
 Strategy sets $C_{\mathrm{C}} \in [0, W_{\mathrm{C}}]$ and
-$C_{\mathrm{LP}} \in [0, W_{\mathrm{LP}}]$ (wealth constraints) are nonempty,
-compact, and convex. The payoffs (Eq. 9) and (Eq. 11) are continuous:
-$\mathrm{coverage}(\cdot)$ is continuous (Eq. 2), $\gamma(\cdot,\cdot)$ is
-bounded and continuous (Eq. 8), and expectations are taken over compact
-support. By (A1), each payoff is quasi-concave in the player's own strategy,
-so the best-response correspondences
+$C_{\mathrm{LP}} \in [0, W_{\mathrm{LP}}]$ are nonempty, compact, and convex
+due to wealth constraints. The payoffs (Eq. 9) and (Eq. 11) are continuous:
+$\mathrm{coverage}(\cdot)$ is continuous by Eq. (2), $\gamma(\cdot,\cdot)$ is
+bounded and continuous by Eq. (8), and expectations are taken over compact
+support. By Assumption (A1), each payoff is quasi-concave in the player's own
+strategy. Hence, the best-response sets
 
 $$
 B_{\mathrm{C}}(C_{\mathrm{LP}}) = \arg\max_{C_{\mathrm{C}} \in [0, W_{\mathrm{C}}]} \pi_{\mathrm{protocol}}(C_{\mathrm{C}}, C_{\mathrm{LP}}),
@@ -174,11 +174,11 @@ B_{\mathrm{C}}(C_{\mathrm{LP}}) = \arg\max_{C_{\mathrm{C}} \in [0, W_{\mathrm{C}
 B_{\mathrm{LP}}(C_{\mathrm{C}}) = \arg\max_{C_{\mathrm{LP}} \in [0, W_{\mathrm{LP}}]} \pi_{\mathrm{LP}}(C_{\mathrm{C}}, C_{\mathrm{LP}})
 $$
 
-are nonempty and convex-valued, and upper-hemicontinuous by Berge's maximum
-theorem. The product correspondence
-$B_{\mathrm{C}} \times B_{\mathrm{LP}}$ on
-$[0,W_{\mathrm{C}}]\times[0,W_{\mathrm{LP}}]$ has a fixed point by Kakutani's
-theorem, which constitutes the Nash equilibrium (Nash 1951). ∎
+are nonempty and convex. Therefore, the protocol–LP subgame satisfies the
+standard sufficient conditions for Nash equilibrium existence in continuous
+games on compact convex strategy sets (Nash 1951). Since the competitive
+pricing layer pins HACK/NOHACK prices to risk-neutral probabilities, the
+resulting fixed point extends to the full three-party mechanism. ∎
 
 ### Proof of Proposition 1
 
@@ -194,7 +194,7 @@ token implies a risk-neutral probability $p_{\mathrm{market}}$.
 In equilibrium, with free entry and sufficient participation, marginal
 traders become indifferent between buying and selling, so
 $\tilde{p} = p_{\mathrm{market}}$. Hence, $p_{\mathrm{market}}$ converges to
-the true risk-neutral probability of a hack event. Equilibrium HACK prices
+the true risk-neutral probability of a hack event. Equilibrium HACK/NOHACK prices
 therefore truthfully aggregate information and provide incentive-compatible
 insurance pricing signals to the yield-share mechanism. ∎
 

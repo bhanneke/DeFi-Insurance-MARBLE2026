@@ -41,9 +41,9 @@ PASS/FAIL. Equation numbers refer to the paper. The suite covers:
       implementation in defi_insurance_simulation.py on random inputs.
 
 Not mechanized: Proposition 1 (truthful risk assessment) is a free-entry
-no-arbitrage argument, and the existence part of Theorem 1 invokes Berge's
-maximum theorem and Kakutani's fixed-point theorem on compact strategy
-sets; neither reduces to computer algebra. What CAN be checked -- the
+no-arbitrage argument, and the existence part of Theorem 1 rests on
+standard existence results for continuous games on compact, convex strategy
+sets (Berge/Kakutani-type arguments); neither reduces to computer algebra. What CAN be checked -- the
 concavity/monotonicity primitives those arguments consume -- is checked
 here. Quasi-concavity of the LP payoff (assumption (A1), LP side) is not
 a theorem and is certified numerically at the baseline calibration in [8].

@@ -26,9 +26,9 @@ and to certify that the closed forms match the implementation in
 - **Proposition 1** (truthful risk assessment) is a free-entry no-arbitrage
   argument; there is no algebra to verify beyond the fair-value identity
   V = p·DF of Eq. (12).
-- **Theorem 1 existence** invokes Berge's maximum theorem and Kakutani's
-  fixed-point theorem on compact strategy sets. The script verifies the
-  primitives those arguments consume (continuity/concavity of the protocol
+- **Theorem 1 existence** invokes standard equilibrium-existence arguments
+  for continuous games on compact, convex strategy sets (Berge/Kakutani-type).
+  The script verifies the primitives those arguments consume (continuity/concavity of the protocol
   payoff, monotonicity and boundedness of γ) and certifies quasi-concavity
   of the LP payoff numerically at the baseline calibration — consistent with
   the paper's statement that (A1) holds when the yield-share feedback is
