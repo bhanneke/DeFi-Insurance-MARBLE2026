@@ -98,8 +98,11 @@ def gamma_from_paper(U, U_target, p_risk, p_anchor, alpha, beta, delta):
     return float(np.clip(g, 0.0, 1.0))
 
 def protocol_target_CC(mu, theta, xi_i, rhoP_i, p_anchor, r_market, TVL_i):
+    # FOC of Eq. (9) incl. expected forfeiture -p*E[min(CC, Loss)]: in the
+    # relevant region (CC < covered loss) the marginal collateral cost is
+    # r_market + p_anchor, not r_market alone.
     denom = (1.0 + rhoP_i) * max(p_anchor, 1e-12) * mu * theta * (1.0 + xi_i)
-    CC_foc = (r_market / denom) ** (1.0 / (theta - 1.0))
+    CC_foc = ((r_market + p_anchor) / denom) ** (1.0 / (theta - 1.0))
     CC_cap = (TVL_i / (mu * (1.0 + xi_i) + 1e-12)) ** (1.0 / theta)
     return float(max(0.0, min(CC_foc, CC_cap)))
 
@@ -228,6 +231,9 @@ def run_single_simulation(params: SimulationParams, run_seed: int) -> Dict[str, 
         coverage_eff        = min(coverage_raw, Umax_today * CLP)
         U                   = coverage_eff / max(CLP, 1e-12)
         coverage_eff_path[t] = coverage_eff
+        # pro-rata rationing when the cap binds: payouts are made on
+        # effective (issued) coverage, consistent with covered-dollar-years
+        cov_scale           = coverage_eff / max(coverage_raw, 1e-12)
 
         # 5) hack event & payout (system-wide Poisson)
         lambda_day_per_proto = lam_hat / 365.0
@@ -244,7 +250,7 @@ def run_single_simulation(params: SimulationParams, run_seed: int) -> Dict[str, 
             for _ in range(k):
                 idx     = rng.choice(params.n_protocols, p=weights)
                 loss_i  = pop["Lbar"][idx] * pop["TVL"][idx]
-                cov_i   = float(min(params.mu * (CC[idx] ** params.theta) * (1.0 + pop["xi"][idx]), pop["TVL"][idx]))
+                cov_i   = float(min(params.mu * (CC[idx] ** params.theta) * (1.0 + pop["xi"][idx]), pop["TVL"][idx])) * cov_scale
                 pay_i   = min(loss_i, cov_i)
                 if pay_i <= 0.0:
                     continue
@@ -475,8 +481,11 @@ def summarize_runs(all_runs, params):
 
     # Pricing metrics
     summary["loss_rate_per_$Myear"] = summary["claims_mean"] / max(summary["covered_years_$M_mean"], 1e-12)
+    # net cost of coverage to protocols (see gather_runlevel_metrics)
+    burn_runs = [float(r["cum_burn_CC"][-1]) for r in all_runs]
+    opp_runs  = [params.r_market * float(np.mean(r["sumCC"])) * years for r in all_runs]
     summary["net_cost_to_protocols_per_$Myear"] = (
-        summary["claims_mean"] - summary["prot_rev_mean"]
+        float(np.mean(burn_runs)) + float(np.mean(opp_runs)) - summary["prot_rev_mean"]
     ) / max(summary["covered_years_$M_mean"], 1e-12)
 
     # Realized APYs (MC mean + 5–95% band for context)
@@ -676,7 +685,10 @@ def gather_runlevel_metrics(all_runs, params):
         prot_apy = 0.0 if avg_sumcc <= 1e-9 else prot_income / (avg_sumcc * years)
 
         loss_rate = claims_M / max(covered_years_M, 1e-12)
-        net_cost  = (claims_M - prot_rev_M) / max(covered_years_M, 1e-12)
+        # net cost of coverage to protocols: forfeited collateral plus
+        # collateral opportunity cost minus yield share (claims received are
+        # the insurance benefit, not a cost) = -prot_income per covered-year
+        net_cost  = (total_burn + opp_cost - prot_rev_M) / max(covered_years_M, 1e-12)
 
         rows.append(dict(
             lp_apy=lp_apy,

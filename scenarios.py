@@ -7,13 +7,13 @@ seeded and deterministic):
 
   baseline   verification metrics for the baseline itself
   stress     4x hack arrival intensity (incident_scale = 4.0):
-             claims ~$182.19M (362 bps/yr), prudential cap binds on ~38% of
-             days (vs ~10% baseline), shortfalls in 8.4% of runs averaging
-             $0.39M (~0.2% of claims), median LP APY ~ -3.1%
-  rpool05    pool return lowered to r_market (5%): median LP APY ~5.4%,
-             ~15 bps below the participation threshold r_market + rho_LP;
-             average utilization rises to ~11.6
-  rpool06    pool return 6%: median LP APY ~6.7%, above the threshold
+             claims ~$132.0M (256 bps/yr), prudential cap binds on ~30% of
+             days (vs ~7% baseline), NO insolvencies (payouts respect the
+             enforced cap), median LP APY ~ -4.3%
+  rpool05    pool return lowered to r_market (5%): median LP APY ~5.1%,
+             ~40 bps below the participation threshold r_market + rho_LP;
+             average utilization rises to ~11.0
+  rpool06    pool return 6%: median LP APY ~6.3%, above the threshold
 
 Usage:
   python scenarios.py stress            # full 1,000-run scenario (~minutes)
@@ -66,8 +66,12 @@ def metrics_from_runs(runs, params):
     out["mean_claims_M"] = float(claims.mean())
     out["loss_rate_bps"] = float(1e4 * claims.mean() / cov_years.mean())
     out["mean_prot_rev_M"] = float(np.mean([r["cum_protocol_share"][-1] for r in runs]))
+    # net protocol cost = forfeited collateral + opportunity cost - yield share
+    years = len(runs[0]["U"]) / 365.0
+    burns = np.array([float(r["cum_burn_CC"][-1]) for r in runs])
+    opp = np.array([params.r_market * float(np.mean(r["sumCC"])) * years for r in runs])
     out["net_cost_bps"] = float(
-        1e4 * (claims.mean() - out["mean_prot_rev_M"]) / cov_years.mean())
+        1e4 * (burns.mean() + opp.mean() - out["mean_prot_rev_M"]) / cov_years.mean())
     # run-level APYs (same accounting as gather_runlevel_metrics)
     df = sim.gather_runlevel_metrics(runs, params)
     for col in ("lp_apy", "prot_apy"):

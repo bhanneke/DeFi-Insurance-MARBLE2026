@@ -78,7 +78,7 @@ CC, CLP, CS, TVL = sp.symbols("C_C C_LP C_S TVL", positive=True)
 mu, xi, p, rmkt, rpool = sp.symbols("mu xi p r_market r_pool", positive=True)
 rhoP, rhoLP, phi, psi, cmax = sp.symbols("rho_P rho_LP varphi psi c_max", positive=True)
 theta = sp.Symbol("theta", positive=True)  # theta in (0,1) handled explicitly
-E = sp.Symbol("E_loss", positive=True)     # E[min(coverage, Loss)]
+E = sp.Symbol("E_loss", positive=True)     # E[(min(coverage, Loss) - C_C)^+], LP-borne loss
 gamma = sp.Symbol("gamma", positive=True)
 lam, lam0, T = sp.symbols("lambda lambda_0 T", positive=True)
 U, Ut, Prisk, Panchor = sp.symbols("U U_target P_risk P_anchor", positive=True)
@@ -98,12 +98,13 @@ section("[1] Protocol FOC and concavity (Eq. 2, Theorem 1 (A1) protocol side)")
 # Atomistic protocol in the coverage-binding region E[min(cov, Loss)] = cov:
 # collateral-dependent part of Eq. (9), with the risk-aversion term merged
 # ((1 + rho_P) multiplies the expected covered loss).
-pi_prot = (1 + rhoP) * p * coverage - rmkt * CC
+# includes the expected forfeiture -p*CC (region CC < covered loss), Eq. (9)
+pi_prot = (1 + rhoP) * p * coverage - p * CC - rmkt * CC
 
 foc = sp.diff(pi_prot, CC)
 CC_star = sp.solve(sp.Eq(foc, 0), CC)
 # closed form used in the simulation (protocol_target_CC):
-CC_code = (rmkt / ((1 + rhoP) * p * mu * theta * (1 + xi))) ** (1 / (theta - 1))
+CC_code = ((rmkt + p) / ((1 + rhoP) * p * mu * theta * (1 + xi))) ** (1 / (theta - 1))
 ok = any(sp.simplify(sol - CC_code) == 0 for sol in CC_star)
 check("FOC solution equals protocol_target_CC closed form", ok)
 
@@ -193,6 +194,7 @@ check("dgamma/dP_risk > 0 (equals (1-alpha) delta (Pr/Pa)^delta / P_risk)",
 section("[6] Proposition 2(i): participation bound (Eq. 14) + minimum pool yield")
 # ----------------------------------------------------------------------
 # LP realized return (Appendix C): r_LP = [gamma (1-phi) Y_total - p E] / C_LP
+# with E the LP-borne loss E[(min(coverage,Loss) - C_C)^+] (first-loss collateral)
 Y_total = rpool * Ctot
 r_LP = (gamma * (1 - phi) * Y_total - p * E) / CLP
 
@@ -216,16 +218,17 @@ dgmin_dCS = sp.simplify(sp.diff(gamma_min_paper, CS))
 check("dgamma_min/dC_S = -gamma_min / C_total < 0",
       sp.simplify(dgmin_dCS + gamma_min_paper / Ctot) == 0)
 
-# (b) In C_C the expected covered loss also grows (E = s * coverage with
-#     loss-to-coverage ratio s in (0,1]), so the claim needs a condition:
-#     dgamma_min/dC_C < 0  <=>  p s cov'(CC) C_total < CLP (rmkt+rhoLP) + p s cov(CC).
+# (b) In C_C the LP-borne loss E = s*(coverage - C_C)^+ (first-loss collateral)
+#     also varies, so the claim needs a condition:
+#     dgamma_min/dC_C < 0  <=>  p s (cov'(CC)-1) C_total < CLP (rmkt+rhoLP) + p s (cov - CC).
 s = sp.Symbol("s", positive=True)
-gmin_CC = (CLP * (rmkt + rhoLP) + p * s * coverage) / ((1 - phi) * rpool * Ctot)
+lp_loss = s * (coverage - CC)          # interior region coverage > CC
+gmin_CC = (CLP * (rmkt + rhoLP) + p * lp_loss) / ((1 - phi) * rpool * Ctot)
 dgmin_dCC = sp.together(sp.diff(gmin_CC, CC))
-condition = sp.simplify(p * s * sp.diff(coverage, CC) * Ctot
-                        - (CLP * (rmkt + rhoLP) + p * s * coverage))
+condition = sp.simplify(p * sp.diff(lp_loss, CC) * Ctot
+                        - (CLP * (rmkt + rhoLP) + p * lp_loss))
 # The derivative's sign equals the sign of `condition`:
-check("sign(dgamma_min/dC_C) = sign(p s cov' C_total - [CLP(r+rho) + p s cov])",
+check("sign(dgamma_min/dC_C) = sign(p s (cov'-1) C_total - [CLP(r+rho) + p s (cov-CC)])",
       sp.simplify(dgmin_dCC * (1 - phi) * rpool * Ctot**2 - condition) == 0)
 # Certify the condition is negative at the paper's calibration for a
 # representative (median) protocol: CC ~ 0.66, coverage ~ 6.6, per-protocol

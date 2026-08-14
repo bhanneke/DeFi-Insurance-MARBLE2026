@@ -206,7 +206,7 @@ $$
 r_{\mathrm{LP}}
 = \frac{\gamma(U,P_{\mathrm{risk}})\,(1-\varphi)\,Y_{\mathrm{total}}}{C_{\mathrm{LP}}}
 - \frac{p_{\mathrm{hack}}\,
-        \mathbb{E}\left[\min(\mathrm{coverage},\mathrm{Loss})\right]}
+        \mathbb{E}\left[\bigl(\min(\mathrm{coverage},\mathrm{Loss})-C_{\mathrm{C}}\bigr)^{+}\right]}
        {C_{\mathrm{LP}}}.
 $$
 
@@ -225,7 +225,7 @@ r_{\mathrm{pool}}
 \frac{
   C_{\mathrm{LP}} \cdot (r_{\mathrm{market}} + \rho_{\mathrm{LP}})
   + p_{\mathrm{hack}}\,
-    \mathbb{E}\bigl[\min(\mathrm{coverage},\mathrm{Loss})\bigr]
+    \mathbb{E}\bigl[\bigl(\min(\mathrm{coverage},\mathrm{Loss})-C_{\mathrm{C}}\bigr)^{+}\bigr]
 }{
   \gamma(U,P_{\mathrm{risk}})\,(1-\varphi)\,C_{\mathrm{total}}
 }.
@@ -240,7 +240,8 @@ and $\gamma$ remain moderate.
 An increase in $C_{\mathrm{C}}$ or in trading-fee inflows $C_{\mathrm{S}}$
 raises $C_{\mathrm{total}}$, thereby increasing LP leverage. Because coverage
 grows sub-linearly in $C_{\mathrm{C}}$ ($\theta<1$) and does not depend on
-$C_{\mathrm{S}}$, the denominator of the participation bound (Eq. 14) rises
+$C_{\mathrm{S}}$, while the LP-borne loss falls as first-loss collateral
+grows, the denominator of the participation bound (Eq. 14) rises
 faster than its numerator. Consequently, $\gamma_{\min}$ decreases, making LP
 participation attractive over a wider range of $\gamma$ values.
 

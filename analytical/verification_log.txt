@@ -30,8 +30,8 @@
 
 === [7] Corollary: capital expansion lowers gamma_min ===
   [PASS] dgamma_min/dC_S = -gamma_min / C_total < 0
-  [PASS] sign(dgamma_min/dC_C) = sign(p s cov' C_total - [CLP(r+rho) + p s cov])
-  [PASS] condition < 0 at baseline calibration (value = -0.02910)
+  [PASS] sign(dgamma_min/dC_C) = sign(p s (cov'-1) C_total - [CLP(r+rho) + p s (cov-CC)])
+  [PASS] condition < 0 at baseline calibration (value = -0.03010)
 
 === [8] Proposition 2(ii): negative feedback and local stability (Eq. 15) ===
   [PASS] dr_LP/dC_LP < 0  <=>  p E C_LP < (1-phi) r_pool [ (alpha cov/Ut)(C_LP + 2A) + (1-alpha) K A C_LP ]

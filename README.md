@@ -42,8 +42,8 @@ The baseline runs 1,000 seeded Monte Carlo runs (base seed 1234, per-run
 offsets) over 500 heterogeneous protocols and a 2-year daily horizon, so all
 results are deterministic: the figures in `outputs/` regenerate
 **byte-identically**, and the printed headline metrics match Section 6 exactly
-(average utilization 9.94, yield share 0.55, $6,155M covered-dollar-years,
-loss rate 76.13 bps/yr, net protocol cost −70.35 bps/yr, LP median APY 11.23%).
+(average utilization 9.51, yield share 0.55, $5,815M covered-dollar-years,
+loss rate 68.45 bps/yr, net protocol cost −60.46 bps/yr, LP median APY 10.55%).
 A full baseline takes a few minutes; use `n_mc_runs = 200` in
 `SimulationParams` (or `scenarios.py --runs 200`) for a quick pass.
 
