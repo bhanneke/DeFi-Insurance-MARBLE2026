@@ -114,8 +114,7 @@ implement this as an adjustment around a capital-proportional "fair" split.
 Let
 
 $$
-\gamma_{\mathrm{fair}}(t)
-= \frac{C_{\mathrm{LP},t}}{C_{\mathrm{LP},t} + \sum_i C_{\mathrm{C},i,t}}
+\gamma_{\mathrm{fair}}(t) = \frac{C_{\mathrm{LP},t}}{C_{\mathrm{LP},t} + \sum_i C_{\mathrm{C},i,t}}
 $$
 
 denote the share LPs would receive if yield were allocated strictly in
@@ -124,10 +123,7 @@ collateral), and let $\gamma_{\mathrm{raw}}(t)$ be the theoretical share from
 Eq. (8). The applied share is then
 
 $$
-\gamma_{\mathrm{sim}}(t)
-= \gamma_{\mathrm{fair}}(t)
-+ \eta \left(\gamma_{\mathrm{raw}}(t) - \gamma_{\mathrm{fair}}(t)\right),
-\qquad \eta = 0.5,
+\gamma_{\mathrm{sim}}(t) = \gamma_{\mathrm{fair}}(t) + \eta \left(\gamma_{\mathrm{raw}}(t) - \gamma_{\mathrm{fair}}(t)\right), \qquad \eta = 0.5,
 $$
 
 clipped to the unit interval. When
@@ -169,9 +165,7 @@ support. By Assumption (A1), each payoff is quasi-concave in the player's own
 strategy. Hence, the best-response sets
 
 $$
-B_{\mathrm{C}}(C_{\mathrm{LP}}) = \arg\max_{C_{\mathrm{C}} \in [0, W_{\mathrm{C}}]} \pi_{\mathrm{protocol}}(C_{\mathrm{C}}, C_{\mathrm{LP}}),
-\qquad
-B_{\mathrm{LP}}(C_{\mathrm{C}}) = \arg\max_{C_{\mathrm{LP}} \in [0, W_{\mathrm{LP}}]} \pi_{\mathrm{LP}}(C_{\mathrm{C}}, C_{\mathrm{LP}})
+B_{\mathrm{C}}(C_{\mathrm{LP}}) = \arg\max_{C_{\mathrm{C}} \in [0, W_{\mathrm{C}}]} \pi_{\mathrm{protocol}}(C_{\mathrm{C}}, C_{\mathrm{LP}}), \qquad B_{\mathrm{LP}}(C_{\mathrm{C}}) = \arg\max_{C_{\mathrm{LP}} \in [0, W_{\mathrm{LP}}]} \pi_{\mathrm{LP}}(C_{\mathrm{C}}, C_{\mathrm{LP}})
 $$
 
 are nonempty and convex. Therefore, the protocol–LP subgame satisfies the
@@ -203,11 +197,7 @@ insurance pricing signals to the yield-share mechanism. ∎
 Define the LP's realized return as
 
 $$
-r_{\mathrm{LP}}
-= \frac{\gamma(U,P_{\mathrm{risk}})\,(1-\varphi)\,Y_{\mathrm{total}}}{C_{\mathrm{LP}}}
-- \frac{p_{\mathrm{hack}}\,
-        \mathbb{E}\left[\bigl(\min(\mathrm{coverage},\mathrm{Loss})-C_{\mathrm{C}}\bigr)^{+}\right]}
-       {C_{\mathrm{LP}}}.
+r_{\mathrm{LP}} = \frac{\gamma(U,P_{\mathrm{risk}})\,(1-\varphi)\,Y_{\mathrm{total}}}{C_{\mathrm{LP}}} - \frac{p_{\mathrm{hack}}\, \mathbb{E}\left[\bigl(\min(\mathrm{coverage},\mathrm{Loss})-C_{\mathrm{C}}\bigr)^{+}\right]} {C_{\mathrm{LP}}}.
 $$
 
 Substituting $Y_{\mathrm{total}} = r_{\mathrm{pool}} C_{\mathrm{total}}$,
@@ -220,15 +210,7 @@ solving for $\gamma(U,P_{\mathrm{risk}})$ yields the participation bound
 Rearranging the participation bound (Eq. 14) gives
 
 $$
-r_{\mathrm{pool}}
-\ge
-\frac{
-  C_{\mathrm{LP}} \cdot (r_{\mathrm{market}} + \rho_{\mathrm{LP}})
-  + p_{\mathrm{hack}}\,
-    \mathbb{E}\bigl[\bigl(\min(\mathrm{coverage},\mathrm{Loss})-C_{\mathrm{C}}\bigr)^{+}\bigr]
-}{
-  \gamma(U,P_{\mathrm{risk}})\,(1-\varphi)\,C_{\mathrm{total}}
-}.
+r_{\mathrm{pool}} \ge \frac{ C_{\mathrm{LP}} \cdot (r_{\mathrm{market}} + \rho_{\mathrm{LP}}) + p_{\mathrm{hack}}\, \mathbb{E}\bigl[\bigl(\min(\mathrm{coverage},\mathrm{Loss})-C_{\mathrm{C}}\bigr)^{+}\bigr] }{ \gamma(U,P_{\mathrm{risk}})\,(1-\varphi)\,C_{\mathrm{total}} }.
 $$
 
 Hence, the pool must outperform the market yield whenever $\gamma$ is low or
