@@ -161,8 +161,8 @@ $C_{\mathrm{LP}} \in [0, W_{\mathrm{LP}}]$ are nonempty, compact, and convex
 due to wealth constraints. The payoffs (Eq. 9) and (Eq. 11) are continuous:
 $\mathrm{coverage}(\cdot)$ is continuous by Eq. (2), $\gamma(\cdot,\cdot)$ is
 bounded and continuous by Eq. (8), and expectations are taken over compact
-support. By Assumption (A1), each payoff is quasi-concave in the player's own
-strategy. Hence, the best-response sets
+support. By the quasi-concavity assumption in Theorem 1, each payoff is
+quasi-concave in the player's own strategy. Hence, the best-response sets
 
 $$
 B_{\mathrm{C}}(C_{\mathrm{LP}}) = \arg\max_{C_{\mathrm{C}} \in [0, W_{\mathrm{C}}]} \pi_{\mathrm{protocol}}(C_{\mathrm{C}}, C_{\mathrm{LP}}), \qquad B_{\mathrm{LP}}(C_{\mathrm{C}}) = \arg\max_{C_{\mathrm{LP}} \in [0, W_{\mathrm{LP}}]} \pi_{\mathrm{LP}}(C_{\mathrm{C}}, C_{\mathrm{LP}})
