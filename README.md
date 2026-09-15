@@ -14,8 +14,6 @@ post forfeitable collateral to access coverage from a liquidity-provider
 capital pool whose yield share adjusts dynamically to utilization and
 market-priced risk (insurance provision layer).
 
-This repository contains exactly the material behind the paper — nothing else.
-
 ## Contents
 
 | Path | Description |
