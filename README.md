@@ -26,6 +26,7 @@ This repository contains exactly the material behind the paper — nothing else.
 | [`Appendix/`](Appendix/) | Online appendix to the proceedings version (which carries no appendices): symbol table, simulation details with Fig. A.1, and all proofs — rendered directly on GitHub |
 | `outputs/` | Reference outputs: Figs. 2–4 of the paper, per-run metrics, protocol population |
 | `nexus_benchmark/` | Methodology behind the Nexus Mutual premium benchmark of Section 6 (median 2.6%/yr across 10,893 covers) |
+| `presentation/` | Slides of the MARBLE 2026 conference talk (self-contained HTML: download and open in a browser; arrow keys navigate the builds, `N` toggles speaker notes) |
 
 ## Reproducing the paper
 
