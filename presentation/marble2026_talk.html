@@ -255,7 +255,7 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']] }, svg: { fontCache: 'glob
   <div class="eq frag">\(\gamma\,(U,\;P_{\mathrm{risk}})\in[0,1]\) — increasing in both arguments</div>
   <ul class="pts" style="font-size:22px;">
     <li class="frag">\(C_{\mathrm{LP}}\) — the <b>risk capital</b> liquidity providers supply to the insurance pool</li>
-    <li class="frag">\(U = \sum_i \mathrm{coverage}_i \,/\, C_{\mathrm{LP}}\) — <b>utilization</b>: coverage sold relative to that capital; high \(U\) means capital is scarce</li>
+    <li class="frag">\(U = \mathrm{coverage} \,/\, C_{\mathrm{LP}}\) — <b>utilization</b>: aggregate outstanding coverage relative to that capital; high \(U\) means capital is scarce</li>
     <li class="frag">\(P_{\mathrm{risk}}\) — the <b>market-implied risk index</b> aggregated from HACK prices</li>
     <li class="frag">LP yield therefore rises through <b>two channels</b>: capital scarcity and market-priced risk</li>
   </ul>
@@ -340,7 +340,7 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']] }, svg: { fontCache: 'glob
   <div class="cols">
     <div class="col" style="max-width:500px;">
       <ul class="pts frag" style="font-size:21px;">
-        <li>Coverage is concave in collateral: \(\mathrm{coverage} = \mu\, C_{\mathrm{C}}^{\theta}(1+\xi)\), \(\theta<1\)</li>
+        <li>Coverage is concave in collateral: \(\mathrm{coverage} = \mu\, C_{\mathrm{C}}^{\theta}(1+\xi)\), \(\theta\in(0,1)\)</li>
         <li>Verifiable security investment raises \(\xi\) and <b>buys more coverage per dollar of collateral</b></li>
         <li>In the no-hack state, protocols <b>receive a share of pool yield</b>, lowering their net cost of coverage</li>
       </ul>
@@ -489,7 +489,7 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']] }, svg: { fontCache: 'glob
   <p class="eyebrow">Analytical results · 2 of 4</p>
   <h2>Proposition 1 · Prices equal risk-neutral hack probabilities</h2>
   <div class="statement">Under competitive markets with risk-neutral speculators, equilibrium HACK prices reveal the risk-neutral probabilities of a material exploit.</div>
-  <div class="eq">\(V_{\mathrm{HACK}}(T) = p_{\mathrm{hack}}(T)\cdot \mathrm{DF}(T), \qquad p_{\mathrm{hack}}(T) = 1 - e^{-\lambda T}\) <span style="color:var(--slate);font-size:16px;">(fair value of the binary claim)</span></div>
+  <div class="eq">\(V_{\mathrm{HACK}}(T) = p_{\mathrm{hack}}(T)\cdot \mathrm{DF}(T), \qquad p_{\mathrm{hack}}(T) = 1 - e^{-\lambda T}\) <span style="color:var(--slate);font-size:16px;">(Eq. 12 — fair value of the binary claim)</span></div>
   <ol class="steps" style="font-size:21px;">
     <li>Free entry: marginal traders trade until subjective beliefs and the implied probability coincide</li>
     <li>Complete binary set per expiry: \(\mathrm{HACK}+\mathrm{NOHACK} = \$1\) enforces price conservation</li>
