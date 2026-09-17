@@ -193,7 +193,7 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']] }, svg: { fontCache: 'glob
   <h2>HACK token prices reveal market-implied hack probabilities</h2>
   <div class="ge">
     <div class="g"><span>Goal</span><div class="getxt">Prices equal risk-neutral hack probabilities</div></div>
-    <div class="e"><span>Enforced by</span><div class="getxt">Free entry and speculation; no-arbitrage in the binary set \(\mathrm{HACK}+\mathrm{NOHACK}=\$1\)</div></div>
+    <div class="e"><span>Enforced by</span><div class="getxt">Competitive speculation; no-arbitrage in the binary set \(\mathrm{HACK}+\mathrm{NOHACK}=\$1\)</div></div>
   </div>
   <div class="cols">
     <div class="col" style="max-width:520px;">
@@ -485,7 +485,7 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']] }, svg: { fontCache: 'glob
   <div class="statement">Under competitive markets with risk-neutral speculators, equilibrium HACK prices reveal the risk-neutral probabilities of a material exploit.</div>
   <div class="eq">\(V_{\mathrm{HACK}}(T) = p_{\mathrm{hack}}(T)\cdot \mathrm{DF}(T), \qquad p_{\mathrm{hack}}(T) = 1 - e^{-\lambda T}\) <span style="color:var(--slate);font-size:16px;">(Eq. 12 — fair value of the binary claim)</span></div>
   <ol class="steps" style="font-size:21px;">
-    <li>Free entry: marginal traders trade until subjective beliefs and the implied probability coincide</li>
+    <li>Competitive trading among admitted speculators: beliefs and the implied probability converge</li>
     <li>Complete binary set per expiry: \(\mathrm{HACK}+\mathrm{NOHACK} = \$1\) enforces price conservation</li>
     <li>Risk neutrality: the HACK price equals the risk-neutral exploit probability; misreporting beliefs is unprofitable</li>
   </ol>
