@@ -178,7 +178,7 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']] }, svg: { fontCache: 'glob
     <div class="qcard frag"><div class="num">Problem 2 · Capital</div>
       <div class="q">Risk capital leaves when risk rises</div>
       <div class="a">Fixed returns give capital no reason to stay in stress, so underwriting capacity is scarcest exactly when it is needed most.</div>
-      <div class="a goal">Goal: a risk premium that adjusts dynamically to utilization and priced risk</div></div>
+      <div class="a goal">Goal: LP returns that adjust dynamically to utilization and priced risk</div></div>
     <div class="qcard frag"><div class="num">Problem 3 · Incentives</div>
       <div class="q">Coverage creates moral hazard</div>
       <div class="a">An insured party invests less in its own security. Today's user-bought cover leaves the protocol, which controls security, without a stake in the policy.</div>
@@ -249,7 +249,7 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']] }, svg: { fontCache: 'glob
   <p class="eyebrow">Problem 2 · Capital</p>
   <h2>The yield share adjusts LP returns to utilization and priced risk</h2>
   <div class="ge">
-    <div class="g"><span>Goal</span><div class="getxt">A dynamic risk premium: LP capital earns more when it carries more</div></div>
+    <div class="g"><span>Goal</span><div class="getxt">LP capital earns more when it carries more</div></div>
     <div class="e"><span>Enforced by</span><div class="getxt">The yield-share function \(\gamma\), a protocol rule measurable on-chain</div></div>
   </div>
   <div class="eq frag">\(\gamma\,(U,\;P_{\mathrm{risk}})\in[0,1]\) — increasing in both arguments</div>
@@ -277,7 +277,7 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']] }, svg: { fontCache: 'glob
       <text x="180" y="73" text-anchor="middle" font-size="13" fill="#5C6878">U = coverage / C<tspan font-size="10" dy="2">LP</tspan></text>
       <text x="180" y="93" text-anchor="middle" font-size="13" fill="#5C6878">P<tspan font-size="10" dy="2">risk</tspan><tspan dy="-2"> = index from HACK prices</tspan></text>
       <rect x="690" y="-56" width="260" height="44" fill="#FFFFFF" stroke="#275CA3"/>
-      <text x="820" y="-38" text-anchor="middle" font-size="15" fill="#1A2433">Pool yield Y</text>
+      <text x="820" y="-38" text-anchor="middle" font-size="15" fill="#1A2433">Pool yield Y<tspan font-size="11" dy="2">total</tspan></text>
       <text x="820" y="-20" text-anchor="middle" font-size="12.5" fill="#5C6878">capital invested in low-risk strategies</text>
       <line x1="820" y1="-12" x2="820" y2="32" stroke="#5C6878" stroke-width="1.8" marker-end="url(#ar6)"/>
       <text x="833" y="14" font-size="13.5" fill="#5C6878">to be distributed</text>
@@ -576,7 +576,7 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']] }, svg: { fontCache: 'glob
     <li><b>Operator decentralization</b> — verification runs off-chain via a trusted operator; licensing and multi-signature governance mitigate, DAO-based verification is a future iteration</li>
     <li><b>Relaxing the idealizations</b> — beyond the single-hack epoch (\(k\)-hack generalization in the appendix) and risk-neutral speculators; the stress test is a first probe</li>
     <li><b>Collusion and manipulation control</b> — arbitrage makes price manipulation costly, independent speculator pricing deters protocol–LP collusion; Sybil circumvention and insider access need operational enforcement</li>
-    <li><b>Operating the forward markets</b> — launch and rollover of quarterly expiries: batch auction or capped bonding curve at the bootstrap, seeded market-making, seed withdrawal at depth thresholds</li>
+    <li><b>Operating the prediction markets</b> — launch and rollover of quarterly expiries: batch auction or capped bonding curve at the bootstrap, seeded market-making, seed withdrawal at depth thresholds</li>
     <li><b>Deployment</b> — protocol-level speculator liquidity, a staged rollout from high-TVL protocols, regulatory clarity on event markets</li>
     <li><b>Ongoing extensions</b> — attacker cost economics with empirically retrieved loss severities, and an implementation of the mechanism as a dynamic attacker–mechanism game</li>
   </ul>
